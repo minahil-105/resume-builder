@@ -1,4 +1,4 @@
-// pages/api/saveResume.js (Saving resume to Firebase API route)
+// app/api/saveResume.js (Saving resume to Firebase API route)
 import { db } from "../../firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 

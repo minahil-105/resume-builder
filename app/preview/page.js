@@ -1,22 +1,23 @@
 "use client";
-import ResumePreview from "../../components/ResumePreview";
-import DownloadButton from "../../components/DownloadButton";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function PreviewPage() {
-  const searchParams = useSearchParams();
-  const resumeData = {
-    name: searchParams.get("name") || "",
-    email: searchParams.get("email") || "",
-    experience: searchParams.get("experience") || "",
-    skills: searchParams.get("skills") || "",
-  };
+function PreviewPage() {
+  const searchParams = useSearchParams(); // This causes the error
+  const paramValue = searchParams.get("someParam");
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-6">
-      <h1 className="text-2xl font-bold mb-6">Resume Preview</h1>
-      <ResumePreview resumeData={resumeData} />
-      <DownloadButton resumeData={resumeData} />
+    <div>
+      <h1>Preview Page</h1>
+      <p>Query Param: {paramValue}</p>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PreviewPage />
+    </Suspense>
   );
 }
